@@ -436,7 +436,7 @@ function Block(_0x57b1a5, _0x52a467) {
   this.controls = function (_0x509725 = -1) {
     let _0x5461e5 = 1
     ;(keyIsDown(16) || keyIsDown(17)) && (_0x5461e5 = 2)
-    keyIsDown(UP_ARROW) || _0x509725 == 8
+    keyIsDown(UP_ARROW) || _0x509725 == BrickSize
       ? this.rotReset && (this.rotate(), (this.rotReset = false))
       : (this.rotReset = true)
     ;(keyIsDown(LEFT_ARROW) || _0x509725 == 2) &&
@@ -444,8 +444,8 @@ function Block(_0x57b1a5, _0x52a467) {
     if (keyIsDown(RIGHT_ARROW) || _0x509725 == 4) {
       this.pos.x += _0x5461e5
       let _0x4396c9 = blockWidth[this.type][this.rot] + 1
-      this.pos.x > columns - _0x4396c9 * 8 &&
-        (this.pos.x = columns - _0x4396c9 * 8)
+      this.pos.x > columns - _0x4396c9 * BrickSize &&
+        (this.pos.x = columns - _0x4396c9 * BrickSize)
     }
     ;(keyIsDown(DOWN_ARROW) || _0x509725 == 16) &&
       ((this.pos.y += 1), (score += 1))
