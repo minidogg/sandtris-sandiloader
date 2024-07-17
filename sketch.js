@@ -567,6 +567,8 @@ function setup() {
   MUSvolume(1)
   resetGame()
 }
+
+let BrickSize = 8
 function AddBlock(
   pixelArray,
   _0x43bde1,
@@ -578,19 +580,20 @@ function AddBlock(
   for (let _0x3f0b12 = 0; _0x3f0b12 < 4; _0x3f0b12++) {
     AddSingleBrick(
       pixelArray,
-      _0x43bde1 + _0x168184[_0x3f0b12 * 2] * 8,
-      _0x41196e - _0x168184[_0x3f0b12 * 2 + 1] * 8,
+      _0x43bde1 + _0x168184[_0x3f0b12 * 2] * BrickSize,
+      _0x41196e - _0x168184[_0x3f0b12 * 2 + 1] * BrickSize,
       blockColorId,
       _0x37a2e7
     )
   }
 }
+
 function AddSingleBrick(pixelArray, x, y, colorId, isStatic) {
 // consoleLog("BRICK ARGS", pixelArray, x, y, colorId, isStatic)
   let theBrick = brick
   isStatic && (theBrick = staticbrick)
-  for (let pixelY = 0; pixelY < 8; pixelY++) {
-    for (let pixelX = 0; pixelX < 8; pixelX++) {
+  for (let pixelY = 0; pixelY < BrickSize; pixelY++) {
+    for (let pixelX = 0; pixelX < BrickSize; pixelX++) {
       if (y - pixelY < 0) {
         continue
       }
