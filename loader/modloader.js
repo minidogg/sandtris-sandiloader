@@ -74,17 +74,19 @@ addModButton.addEventListener("click", async()=>{
     }
 })
 
+// Add the temp mod
+if (mods.length == 0 && localStorage.getItem("loadTemp")=="temp") {
+    console.log("Adding the temp mod...")
+    RegisterMod(await (await fetch("/mods/temp.js")).text(), "Test Mod")
+}
+
 // Add the example mod
 if (mods.length == 0 && isDev) {
     console.log("Adding the example mod...")
     RegisterMod(await (await fetch("/mods/examplemod.js")).text(), "Test Mod")
 }
 
-// Add the example mod
-if (mods.length == 0 && localStorage.getItem("loadTemp")=="temp") {
-    console.log("Adding the temp mod...")
-    RegisterMod(await (await fetch("/mods/temp.js")).text(), "Test Mod")
-}
+
 
 // Initialize active mods
 console.log("Preparing enabled mods...")
