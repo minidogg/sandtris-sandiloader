@@ -1,2 +1,5 @@
-# SANDILOADER
-Sandiloader is currently in an unfinished state. If you want to help out check my todo I made. It's mostly just for me, but anyone can look at it.
+# SandiLoader
+Sandiloader is a mod loader for Sandtris with run-time code and patching capabilities.
+
+# Sandtris
+Sandtris is a game made by [Franco Miranda](https://francomiranda.com/) that you can play at https://sandtris.com
