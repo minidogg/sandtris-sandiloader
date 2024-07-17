@@ -81,7 +81,7 @@ if (mods.length == 0 && isDev) {
 }
 
 // Add the example mod
-if (mods.length == 0 && localStorage.getItem("loadTemp")==temp) {
+if (mods.length == 0 && localStorage.getItem("loadTemp")=="temp") {
     console.log("Adding the temp mod...")
     RegisterMod(await (await fetch("/mods/temp.js")).text(), "Test Mod")
 }
