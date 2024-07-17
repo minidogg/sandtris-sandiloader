@@ -131,3 +131,12 @@ button:active{
     margin:auto;
     width:95vw;
 }
+
+.topButtons{
+  display: block;
+  margin:auto;
+  margin-bottom:20px;
+  margin-top:10px;
+  width:fit-content;
+  height:fit-content;
+}

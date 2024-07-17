@@ -22,14 +22,15 @@ console.log("Retrieving mods from localStorage...")
 /**
  *@type {Array<Mod>}
  */
-const mods = JSON.parse(localStorage.getItem("mods"))
+let mods = JSON.parse(localStorage.getItem("mods"))
 interalApi.mods = mods
 
 // Function to update data
 function updateData() {
     console.log("Running updateData()...")
+    mods = mods.filter(e => e != null||e!=undefined)
     ModApi.mods = Object.freeze(mods)
-    localStorage.setItem("mods", JSON.stringify(mods.filter(e => e != null).map(sandbox => ({ ...sandbox, sandbox: undefined }))));
+    localStorage.setItem("mods", JSON.stringify(mods.map(sandbox => ({ ...sandbox, sandbox: undefined }))));
     console.log("Finished running updateData()")
 }
 interalApi.updateData = updateData

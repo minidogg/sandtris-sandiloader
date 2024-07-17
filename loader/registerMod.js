@@ -2,49 +2,42 @@ import * as ver from './ver.js'
 import { interalApi } from './modloader.js'
 import {Mod} from './typeclasses.js'
 import { AddModElement } from './addModEl.js'
-import { CodeSandbox } from './codesandbox.js'
+import { GetModManifest } from './getmanifest.js'
 
 // Register Mod
 // I used AI to clean this code up lol. it did do a pretty good job tho
 export function RegisterMod(code, referAs = "the mod", replaceDupeAuto = false) {
   try{
-  const { mods } = interalApi;
-  const sandbox = new CodeSandbox();
+    const { mods } = interalApi;
+    let manifest = GetModManifest(code, referAs)
 
-  sandbox.eval(code);
-  const manifest = sandbox.eval('GetManifest()');
-  console.log("manifest", manifest)
+    const dupeModIndex = mods.findIndex(mod => typeof(mod)==="undefined"?false:mod.uuid === manifest.uuid);
+    if (dupeModIndex !== -1) {
+      const dupeMod = mods[dupeModIndex];
+      console.log(dupeMod)
+      try{
+        Object.defineProperty(dupeMod, "configurable", true)
+      }catch(err){}
+      if (!shouldReplaceDupeMod(dupeMod, manifest, replaceDupeAuto)) return;
+      document.querySelector("._MODITEM_"+dupeMod.uuid).remove()
+      mods.splice(dupeModIndex, 1);
+    }
 
-  if (!isValidManifest(manifest)) {
-    console.log(code)
-    alert(`"${referAs}" failed to register due to malformed manifest or lack of one.`);
-    return;
-  }
+    const mod = new Mod(
+      manifest.name,
+      manifest.description,
+      manifest.author,
+      manifest.websiteURL,
+      manifest.imageURL,
+      manifest.modVersion,
+      manifest.uuid,
+      code
+    );
 
-  const dupeModIndex = mods.findIndex(mod => mod.uuid === manifest.uuid);
-  if (dupeModIndex !== -1) {
-    const dupeMod = mods[dupeModIndex];
-    Object.defineProperty(dupeMod, "configurable", true)
-    if (!shouldReplaceDupeMod(dupeMod, manifest, replaceDupeAuto)) return;
-    mods.splice(dupeModIndex, 1);
-  }
+    mods.push(mod);
+    interalApi.updateData()
 
-  const mod = new Mod(
-    manifest.name,
-    manifest.description,
-    manifest.author,
-    manifest.websiteURL,
-    manifest.imageURL,
-    manifest.modVersion,
-    manifest.uuid,
-    code
-  );
-
-  mods.push(mod);
-  interalApi.updateData()
-  sandbox.destroy();
-
-  AddModElement(mod);
+    AddModElement(mod);
   }catch(err){
     console.warn(err)
     console.log(code)
@@ -54,18 +47,7 @@ export function RegisterMod(code, referAs = "the mod", replaceDupeAuto = false) 
   }
 }
 
-function isValidManifest(manifest) {
-  return (
-    manifest &&
-    manifest.name &&
-    manifest.description &&
-    manifest.author &&
-    manifest.websiteURL &&
-    manifest.imageURL &&
-    manifest.uuid &&
-    manifest.modVersion
-  );
-}
+
 
 function shouldReplaceDupeMod(dupeMod, manifest, replaceDupeAuto) {
   if (replaceDupeAuto) return true;
