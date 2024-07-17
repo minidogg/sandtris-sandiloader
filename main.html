@@ -1,0 +1,271 @@
+<html lang="en">
+
+<head>
+	<title>SANDTRIS</title>
+	<script src="hammer.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+	<!-- <script src="sketch.js"></script> -->
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8" />
+</head>
+
+<body>
+
+	<center>
+		<!--HEADER LOGO-->
+		<br />
+		<h1 id="sandtrislogo">SANDTRIS SANDILOADER</h1>
+
+		<!--GOOGLE ADS AND LEADER BOARD-->
+		<div id="main2">
+			<div class="adsbox">
+				ads!
+				<div class="ad">
+					<script async
+						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9200311124038960"
+						crossorigin="anonymous"></script>
+					<!-- top sandtris ad -->
+					<ins class="adsbygoogle" style="display:inline-block;width:200px;height:310px"
+						data-ad-client="ca-pub-9200311124038960" data-ad-slot="4677385647"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+				<div class="ad">
+					<script async
+						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9200311124038960"
+						crossorigin="anonymous"></script>
+					<!-- bottom sandtris ad -->
+					<ins class="adsbygoogle" style="display:inline-block;width:200px;height:310px"
+						data-ad-client="ca-pub-9200311124038960" data-ad-slot="1316725130"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</div>
+
+			<div id="cnv">
+
+				<!--ABOUT PAGE-->
+				<dialog id="aboutpage" class="page" close>
+					<div class="box">
+						<div class="logo is-animation">
+							<span>S</span>
+							<span>A</span>
+							<span>N</span>
+							<span>D</span>
+							<span>T</span>
+							<span>R</span>
+							<span>I</span>
+							<span>S</span>
+						</div>
+						<p>MADE BY <a href="https://francomiranda.com/" target="_blank">FRANCO MIRANDA</a> USING P5.JS
+						</p>
+						<p>INSPIRED BY SETRIS BY
+							<a href="https://itch.io/profile/mslivo" target="_blank">MSLIVO</a>
+						</p>
+						<p>MOD LOADER BY
+							<a href="https://github.com/minidogg" target="_blank">Unluckycrafter</a>
+						</p>
+						<br />
+						<u>CONTROLS</u>
+						<br />
+						<table style="font-size: 12px">
+							<tbody>
+								<tr>
+									<td>Move Block:</td>
+									<td>Left/Right Arrows</td>
+								</tr>
+								<tr>
+									<td>Spin Block: </td>
+									<td>Up Arrow</td>
+								</tr>
+								<tr>
+									<td>Move Down Faster: </td>
+									<td>Down Arrow</td>
+								</tr>
+								<tr>
+									<td>Move Sideways Faster: </td>
+									<td>Shift/Ctrl</td>
+								</tr>
+								<tr>
+									<td>Pause: </td>
+									<td>P</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p>Connect the same color <br> across the screen to clear lines!</p>
+						<br />
+						<p>NOT AFFILIATED WITH Tetris®</p>
+						<br />
+						<button type="button" class="redbutton" onClick="toggleAbout()">X</button>
+					</div>
+				</dialog>
+
+
+
+				<!-- Mods Page -->
+				<dialog id="modpage" class="page" close>
+					<div class="betterBox">
+						<div class="logo is-animation">
+							<span>M</span>
+							<span>O</span>
+							<span>D</span>
+							<span>S</span>
+						</div>
+						<div id="modlist">
+
+							<!-- <div class="modItem">
+								<a href="https://github.com/minidogg/sandiloader" target="_blank" class="modLink">
+									<img src="https://http.cat/404" class="modImg" />
+								</a>
+								<div class="modInfo">
+									<p class="modName">Static Powder</p>
+									<p class="modAuthor">minidogg</p>
+									<p class="modDescription">Makes the powder not go to the sides.</p>
+								</div>
+								<div class="modControls">
+									<input type="checkbox" class="modCheckbox">
+									<br>
+									<button type="button" class="redbutton">X</button>
+								</div>
+							</div> -->
+
+						</div>
+						<p class="refreshWarning">You have to refresh for any changes to apply!</p>
+						<button type="button" class="greenbutton shortButton" id="addModButton">Add Mod</button>
+						<button type="button" class="bluebutton shortButton" id="openModBrowser">Mod Browser</button>
+						<button type="button" class="redbutton shortButton" onClick="toggleModMenu()">X</button>
+					</div>
+				</dialog>
+
+				<!--START PAGE-->
+				<dialog id="startpage" class="page" open>
+					<div class="box" style="width:100%;">
+						Welcome to
+						<div class="logo is-animation">
+							<span>S</span>
+							<span>A</span>
+							<span>N</span>
+							<span>D</span>
+							<span>T</span>
+							<span>R</span>
+							<span>I</span>
+							<span>S</span>
+						</div>
+						<br />
+						<button type="button" class="greenbutton" onClick="startGame()">START</button>
+						<button type="button" class="redbutton" id="toggleAbout">ABOUT</button>
+						<button type="button" class="bluebutton" onclick="toggleModMenu()">MODS</button>
+						<br /><br />
+						<div style="display: grid; width:300px; grid-template-columns: auto auto;">
+							<div>
+								<p id="musicText" style="margin:0px; padding:5px;">MUS</p>
+								<input style="width:120px" type="range" min="0" max="10" value="1" class="slider"
+									id="mus1Slider" onchange="MUSvolume(this.value)" />
+							</div>
+
+							<div>
+								<p id="soundText" style="margin:0px; padding:5px;">SFX</p>
+								<input style="width:120px" type="range" min="0" max="10" value="1" class="slider"
+									id="sfx1Slider" onchange="SFXvolume(this.value)" />
+							</div>
+						</div>
+						<a class="joinOurDiscord" href="" onclick="window.open(`https://discord.gg/xHCaWPgaGQ`)">Join
+							our
+							Discord!!</a>
+					</div>
+				</dialog>
+
+				<!--PAUSE PAGE-->
+				<dialog id="pausepage" class="page" close>
+					<div class="box">
+						<br />
+						PAUSED
+						<br /><br />
+						<button type="button" class="redbutton" onClick="unpauseGame()">RESUME</button>
+						<br /><br />
+						<button type="button" class="bluebutton" onClick="newGame()">NEW GAME</button>
+						<br /><br />
+						MUS
+						<input style="width:80px" type="range" min="0" max="10" value="1" class="slider" id="mus2Slider"
+							onchange="MUSvolume(this.value)" />
+						<br />
+						SFX
+						<input style="width:80px" type="range" min="0" max="10" value="0.5" class="slider"
+							id="sfx2Slider" onchange="SFXvolume(this.value)" />
+					</div>
+				</dialog>
+
+
+
+				<!--GAMEOVER PAGE-->
+				<dialog id="gameoverpage" class="page" close>
+					<div class="box">
+						<br /><br />
+						GAME OVER
+						<br />
+						<p id="gameoverText"></p>
+						<button type="button" class="greenbutton" onClick="newGame()">NEW GAME</button>
+						<br /><br />
+						<button type="button" class="bluebutton" onClick="shareText()">share</button>
+						<br /><br />
+						<div style="width:400px">
+
+							<h4>SUBMIT YOUR SCORE:</h4>
+							<span><input type="text" class="namebox" id="name" placeholder="enter your name"
+									maxlength="16">
+								<button class="submitbutton" onclick="submitScore()">Submit</button></span>
+							<p id="responseBox" style="font-size: 12px"></p>
+						</div>
+					</div>
+				</dialog>
+
+
+
+
+				<div id="p5_loading">LOADING</div>
+
+				<!-- Popup Page -->
+				<!-- <dialog id="popuppage" class="page" close>
+					<div class="box">
+						<div class="logo is-animation">
+							<span>S</span>
+							<span>A</span>
+							<span>N</span>
+							<span>D</span>
+							<span>T</span>
+							<span>R</span>
+							<span>I</span>
+							<span>S</span>
+						</div>
+						<p class="popupText">Best hex value?</p>
+						<div class="popupInput">
+							<input type="text" placeholder="Enter hex value" class="namebox">
+							<button type="button" class="greenbutton">Submit</button>
+						</div>
+					</div>
+				</dialog>
+				<script>
+					document.getElementById("popuppage").open = true
+				</script> -->
+			</div>
+
+
+			<div class="adsbox" id="adsbox">
+				Weekly Leaderboard
+				<div id="leaderboard-list"></div>
+				Your Rank
+				<div id="bestScoreEntry" class="leaderboard"></div>
+			</div>
+		</div>
+	</center>
+
+	<script src="loader/modloader.js" type="module"></script>
+
+</body>
+
+</html>

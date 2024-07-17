@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANDILOADER</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+
+<body>
+    <!-- The actual game is an iframe in case someone downloads a malicious mod that breaks the game, or a mod that breaks the mods menu. -->
+    <h1>SANDILOADER</h1>
+    <button id="fullscreen">Fullscreen Window</button>
+    <button id="fullscreen2">Fullscreen Game</button>
+    <button id="disable">Disable All Mods</button>
+    <button id="delete">Delete All Mods (This requires 2 refreshes)</button>
+    <iframe id="game" src="/main.html"></iframe>
+
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        #game {
+            display: inline-block;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+    </style>
+    <script>
+        const iframe = document.getElementById("game")
+        function deleteIframe() {
+            document.body.removeChild(iframe)
+        }
+
+        // Fix error caused by no mods array.
+        if (!localStorage.getItem("mods")) {
+            localStorage.setItem("mods", JSON.stringify([]))
+            deleteIframe()
+            window.location.reload()
+        }
+
+        document.getElementById("fullscreen").addEventListener("click", () => {
+            iframe.requestFullscreen();
+        });
+        document.getElementById("fullscreen2").addEventListener("click", () => {
+            iframe.style.position = "absolute"
+            iframe.style.top = "0"
+            iframe.style.left = "0"
+        });
+
+        document.getElementById("disable").addEventListener("click", () => {
+            deleteIframe()
+            let mods = JSON.parse(localStorage.getItem("mods"))
+            mods.forEach(mod => {
+                mod.enabled = false
+            })
+            localStorage.setItem("mods", JSON.stringify(mods))
+
+            window.location.reload()
+        });
+        document.getElementById("delete").addEventListener("click", () => {
+            deleteIframe()
+            // localStorage.clear()
+            localStorage.setItem("mods", JSON.stringify([]))
+            window.location.reload()
+        });
+    </script>
+</body>
+
+</html>

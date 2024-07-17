@@ -1,0 +1,133 @@
+:root {
+    --primary-bg-color: #0c0c0c; /* Dark background */
+    --secondary-bg-color: #202020; /* Slightly lighter background */
+    --text-color: #e6e6e6; /* White text */
+  
+    --neon-green: hsl(102, 90%, 40%);
+    --neon-blue: hsl(196, 90%, 50%);
+    --neon-pink: hsl(340, 90%, 50%);
+    --neon-yellow: hsl(50, 90%, 50%);
+  
+    --desert-sand: rgb(210, 180, 140);
+    --desert-brown: rgb(67, 59, 50);
+    --desert-browndark: rgb(24, 21, 17);
+    --desert-orange: rgb(255, 119, 45);
+    --desert-red: rgb(255, 0, 0);
+}
+  
+
+@font-face {
+    font-family: "pixelFont";
+    src: url("/fonts/retroFont.ttf");
+  }
+
+body{
+    margin:0;
+    background-color:#433b32;
+}
+
+*{
+    font-family: "pixelFont";
+    color:white;
+}
+
+.title{
+    color:#d2b48c;
+    font-size: 36px;
+    text-shadow: 0px 4px 4px rgba(73, 62, 46, 0.8);
+    text-align: center;
+}
+
+
+.modItem{
+  display: flex;
+  margin-bottom: 10px;
+  padding: 20px;
+  background-color: #1c1c1c;
+  width: 500px;
+  height: 100px;
+}
+
+.modImg{
+  width: 100px;
+  height: 100px;
+}
+
+.modInfo{
+    padding-left: 10px;
+    width: 300px;
+    height:100%;
+
+    overflow-y: scroll;
+}
+
+.modName{
+  font-size: 18px;
+}
+
+.modAuthor{
+  font-size: 15px;
+}
+
+.modDescription{
+  font-size: 10px;
+}
+
+.modButtons{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100px;
+  margin-left:10px;
+}
+
+button{
+    cursor:pointer;
+    font-size: 15px;
+    border: none;
+    font-family: "pixelFont";
+    color: var(--text-color);
+    padding:1px;
+}
+
+button:hover{
+    transform: translate(0,4px);
+    box-shadow: 0px 4px black;
+}
+
+button:active{
+    transform: translate(0,8px);
+}
+  
+.bluebutton{
+    background-color: var(--neon-blue);
+    box-shadow: 0px 8px rgb(16,18,53);
+}
+  
+.redbutton{
+    background-color: var(--neon-pink);
+    box-shadow: 0px 8px rgb(53,16,18);
+}
+  
+.bluebutton{
+    background-color: var(--neon-blue);
+    box-shadow: 0px 8px rgb(16, 49, 53);
+}
+  
+.greenbutton{
+    background-color: var(--neon-green);
+    box-shadow: 0px 8px rgb(16,53,18);
+}
+
+.scroll {
+  scrollbar-width: thin; /* other values: auto | thin | none */
+  scrollbar-color: #5e5e5e #8a8b8d; /* thumb and track color */
+}
+
+#mods{
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px;
+    margin:auto;
+    width:95vw;
+}
