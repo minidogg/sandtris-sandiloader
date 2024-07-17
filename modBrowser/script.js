@@ -46,6 +46,11 @@ async function AddMod(modURL){
             navigator.clipboard.writeText(modURL)
         })
 
+        // Give the copy code button functionality
+        div.querySelector(".copyCode").addEventListener("click", ()=>{
+            navigator.clipboard.writeText(code)
+        })
+
         // Add the div to the mods div.
         document.getElementById("mods").appendChild(div)
     }catch(err){
